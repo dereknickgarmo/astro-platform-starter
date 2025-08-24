@@ -28,3 +28,22 @@ export default defineStackbitConfig({
     "contentSources": [],
     "postInstallCommand": "npm i --no-save @stackbit/types"
 })
+export default defineStackbitConfig({
+  // ...
+  contentSources: [
+    new GitContentSource({
+      rootPath: __dirname,
+      contentDirs: ["content"],
+      models: [
+        {
+          name: "Page",
+          type: "page",
+          // Static URL path derived from the "slug" field
+          urlPath: "/{slug}",
+          filePath: "content/pages/{slug}.json",
+          fields: [{ name: "title", type: "string", required: true }]
+        },
+        // ...
+      ],
+    })
+  ],
